@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
+      #box {
+        height: 200px;
+        border: 1px solid red;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="box">
+      <span>
+        Drag file or folder to this box 
+      </span>
+    </div>
+    <div>
+      <ul id="list">
+      </ul>
+    </div>
+  </body>
+  <script type="module">
+    import {dropedFileReader} from './dropedFileReader.js'
+
+    const box = document.querySelector('#box');
+    const list = document.querySelector('#list');
+    
+    box.addEventListener('drop', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      dropedFileReader(e).then((data) => {
+        let str = '';
+        
+        for(let item of data) {
+          str+=`<li>name: ${item.name}--path: ${item.fullPath}</li><br>`
+        }
+        
+        list.innerHTML = str;
+      });
+    })
+    
+    box.addEventListener('dragover', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+    })
+    
+    box.addEventListener('dragleave', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+    })
+   
+  </script>
+</html>
