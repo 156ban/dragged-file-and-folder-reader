@@ -1,4 +1,4 @@
-# droped-file-and-folder-reader
+# dropped-file-and-folder-reader
 
 一段用于读取拖拽的多个文件或文件夹的代码。
 
